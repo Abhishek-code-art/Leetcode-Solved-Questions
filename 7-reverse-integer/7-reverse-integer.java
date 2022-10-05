@@ -10,7 +10,7 @@ class Solution {
                 return 0;
             }
             
-            answer = answer * 10 + digit;
+            answer = (answer * 10) + digit;
             x /= 10;
         }
         
