@@ -1,0 +1,16 @@
+
+import java.util.*;
+class Solution {
+    public boolean containsDuplicate(int[] nums) {
+        final Set<Integer> unique = new HashSet<>();
+        
+        for(int num : nums) {
+            if(unique.contains(num)) {
+                return true;
+            }
+            unique.add(num);
+        }
+        
+        return false;
+    }
+}
