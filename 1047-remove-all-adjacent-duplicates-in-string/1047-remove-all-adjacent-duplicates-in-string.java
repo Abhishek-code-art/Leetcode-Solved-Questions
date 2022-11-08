@@ -1,20 +1,16 @@
 import java.util.Stack;
 class Solution {
     public String removeDuplicates(String s) {
-        Stack<Character> stack = new Stack<>();
+        char[] stack = new char[s.length()];
+        int ans = 0;
+        
         for(int i = 0; i < s.length(); i++) {
-            if(!stack.isEmpty() && stack.peek() == s.charAt(i)) {
-                stack.pop();
+            if(ans > 0 && s.charAt(i) == stack[ans-1]) {
+                ans--;   
             } else {
-                stack.push(s.charAt(i));
+                stack[ans++] = s.charAt(i);
             }
         }
-        
-        StringBuilder sb = new StringBuilder();
-        while(stack.size() > 0) {
-            sb.append(stack.pop());
-        }
-        
-        return sb.reverse().toString();
+        return new String(stack, 0, ans);
     }
 }
