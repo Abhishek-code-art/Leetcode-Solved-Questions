@@ -11,10 +11,14 @@ class Solution {
             arr2[s2.charAt(i) - 'a']++;
         }
         
-        for(int i = s1.length(); i < s2.length(); i++) {
-            if(Arrays.equals(arr1,arr2)) return true;
-            arr2[s2.charAt(i - s1.length()) - 'a']--;
-            arr2[s2.charAt(i) - 'a']++;
+        int i = 0;
+        int j = s1.length();
+        while(j < s2.length()) {
+            if(Arrays.equals(arr1, arr2)) return true;
+            arr2[s2.charAt(i) - 'a']--;
+            arr2[s2.charAt(j) - 'a']++;
+            i++;
+            j++;
         }
         
         if(Arrays.equals(arr1, arr2)) return true;
