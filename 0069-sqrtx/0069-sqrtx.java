@@ -1,16 +1,21 @@
 class Solution {
-    public int mySqrt(int x) {
-        if(x == 1) return 1;
-        if(x == 2147483647) return 46340;
-        int i = 0;
-        for(;i <= x/2 && i*i <= Integer.MAX_VALUE; i++) {
-            if(i*i == x) return i;
-            if(i*i < x) {
-                
+    public int mySqrt(long x) {
+        if(x == 0) return 0;
+        long lo = 1;
+        long hi = x;
+        long ans = 1;
+        
+        while(lo <= hi) {
+            long mid = lo + (hi-lo)/2;
+            long square = mid*mid;
+            if(square == x) return (int)mid;
+            else if(square < x) {
+                ans = mid;
+                lo = mid+1;
             } else {
-                return (i-1);
+                hi = mid-1;
             }
         }
-        return i-1;
+        return (int)ans;
     }
 }
