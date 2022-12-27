@@ -1,21 +1,14 @@
 class Solution {
-    public int mySqrt(long x) {
+    public int mySqrt(int x) {
         if(x == 0) return 0;
-        long lo = 1;
-        long hi = x;
-        long ans = 1;
-        
-        while(lo <= hi) {
-            long mid = lo + (hi-lo)/2;
-            long square = mid*mid;
-            if(square == x) return (int)mid;
-            else if(square < x) {
-                ans = mid;
-                lo = mid+1;
-            } else {
-                hi = mid-1;
-            }
+        int lo = 1;
+        int hi = x;
+        while(lo < hi) {
+            int mid = lo + (hi-lo)/2;
+            if(mid <= x/mid && (mid+1) > x/(mid+1)) return mid;
+            else if(mid > x/mid) hi = mid;
+            else lo = mid+1;
         }
-        return (int)ans;
+        return lo;
     }
 }
