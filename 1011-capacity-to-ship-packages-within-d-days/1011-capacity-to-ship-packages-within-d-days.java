@@ -1,6 +1,7 @@
 class Solution {
     public int shipWithinDays(int[] weights, int days) {
         int n = weights.length;
+        if(n == 1) return weights[0];
         int lo = weights[0];
         int hi = weights[0];
         int res = 0;
