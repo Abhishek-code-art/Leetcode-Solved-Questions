@@ -20,20 +20,19 @@ class Solution {
     }
     
     public boolean isPossible(int[] arr, int m, int k, int mid) {
-        int total = 0;
         int c = 0;
         for(int i = 0; i < arr.length; i++) {
             if(arr[i] <= mid) {
                 c++;
                 if(c == k) {
-                    total++;
+                    m--;
                     c = 0;
                 }
             } else {
                 c = 0;
             }
         }
-        if(total >= m) return true;
+        if(m <= 0) return true;
         return false;
     }
 }
