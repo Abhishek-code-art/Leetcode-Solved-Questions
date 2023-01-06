@@ -38,16 +38,27 @@ class GFG
 
 class Solution {
     int median(int matrix[][], int R, int C) {
-        int[] ans = new int[R*C];
-        
-        for(int i = 0; i < R; i++) {
-            for(int j = 0; j < C; j++) {
-                int ind = C*i + j;
-                ans[ind] = matrix[i][j];
+        int lo = 1;
+        int hi = 2000;
+        while(lo <= hi) {
+            int mid = (lo+hi) >> 1;
+            int cnt = 0;
+            for(int i = 0; i < R; i++) {
+                cnt += countSmallerThanEqualToMid(matrix[i], mid);
             }
+            if(cnt <= (R*C)/2) lo = mid+1;
+            else hi = mid-1;
         }
-        
-        Arrays.sort(ans);
-        return ans[(ans.length+1)/2 - 1];
+        return lo;
+    }
+    
+    public int countSmallerThanEqualToMid(int[] row, int mid) {
+        int l = 0, h = row.length-1;
+        while(l <= h) {
+            int md = (l+h)/2;
+            if(row[md] <= mid) l = md+1;
+            else h = md-1;
+        }
+        return l;
     }
 }
