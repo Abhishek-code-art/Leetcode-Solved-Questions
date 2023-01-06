@@ -1,9 +1,16 @@
 class Solution {
     public int findMin(int[] nums) {
-        int min = 5000;
-        for(int i = 0; i<nums.length; i++) {
-            min = (min > nums[i]) ? nums[i]:min;
+        int lo = 0, hi = nums.length-1;
+        while(lo < hi) {
+            int mid = (lo+hi)/2;
+            if(nums[mid] < nums[hi]) {
+                hi = mid;
+            } else if(nums[mid] > nums[hi]) {
+                lo = mid+1;
+            } else {
+                hi--;
+            }
         }
-        return min;
+        return nums[lo];
     }
 }
