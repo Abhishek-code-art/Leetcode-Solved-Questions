@@ -31,10 +31,9 @@ class Main {
 
 class Solution {
     int sum(int arr[], int n) {
-        if(n == 0) return 0;
-        int previousSum = sum(arr, n-1);
-        int ans = arr[n-1];
-        ans = ans + previousSum;
-        return ans;
+        for(int i = 1; i < n; i++) {
+            arr[i] += arr[i-1];
+        }
+        return arr[n-1];
     }
 }
