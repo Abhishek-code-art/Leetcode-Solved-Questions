@@ -1,57 +1,51 @@
 class Solution {
     public int[] sortArray(int[] nums) {
-        if(nums.length == 1) return nums;
-        int lo = 0;
-        int hi = nums.length-1;
-        mergeSort(nums, lo, hi);
+        mergeSort(nums, 0, nums.length-1);
         return nums;
     }
     
-    void merge(int arr[], int l, int m, int r)
-    {
-        int len1 = m-l+1;
-        int len2 = r-m;
+    public void mergeSort(int[] nums, int low, int high) {
+        if(low < high) {
+            int mid = low + (high-low)/2;
+            
+            mergeSort(nums, low, mid);
+            mergeSort(nums, mid+1, high);
+            
+            merge(nums, low, mid, high);
+        }
+    }
+    
+    public void merge(int[] nums, int low, int mid, int high) {
+        int l1 = mid - low + 1;
+        int l2 = high - mid;
         
-        int[] t1 = new int[len1];
-        int[] t2 = new int[len2];
+        int[] t1 = new int[l1];
+        int[] t2 = new int[l2];
         
-        for(int i = 0; i < len1; i++) {
-            t1[i] = arr[l+i];
+        for(int i = 0; i < l1; i++) {
+            t1[i] = nums[i + low];
         }
         
-        for(int j = 0; j < len2; j++) {
-            t2[j] = arr[m+1+j];
+        for(int j = 0; j < l2; j++) {
+            t2[j] = nums[j+mid+1];
         }
         
         int i = 0, j = 0;
-        int index = l;
-        while(i<len1 && j<len2) {
+        int k = low;
+        while(i < l1 && j < l2) {
             if(t1[i] <= t2[j]) {
-                arr[index++] = t1[i++];
+                nums[k++] = t1[i++];
             } else {
-                arr[index++] = t2[j++];
+                nums[k++] = t2[j++];
             }
         }
         
-        while(index<arr.length && i<len1) {
-            arr[index++] = t1[i++];
+        while(i < l1) {
+            nums[k++] = t1[i++];
         }
-        while(index<arr.length && j<len2) {
-            arr[index++] = t2[j++];
+        
+        while(j < l2) {
+            nums[k++] = t2[j++];
         }
     }
-
-    // merge()
-    void mergeSort(int arr[], int l, int r)
-    {
-        if(l >= r) return;
-        
-        int mid = l + (r - l) / 2;
-        
-        // divide the array into two halves i.e. right and left
-        mergeSort(arr, l, mid);
-        mergeSort(arr, mid + 1, r);
-        // sort and merge
-        merge(arr, l, mid, r);
-    }
-}
+} 
