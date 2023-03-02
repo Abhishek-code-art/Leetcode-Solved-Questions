@@ -1,6 +1,6 @@
 class Solution {
     public int compress(char[] chars) {
-        int i = 0;
+         int i = 0;
         int ans  = 0;
         int n = chars.length;
         
