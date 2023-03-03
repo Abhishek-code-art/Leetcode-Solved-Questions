@@ -14,16 +14,23 @@ class Solution {
             return head;
         }
         
-        ListNode prev = null;
-        ListNode curr = head;
-        ListNode forward = head;
-        while(curr != null) {
-            forward = curr.next;
-            curr.next = prev;
-            prev = curr;
-            curr = forward;
+        // ListNode curr = head;
+        // ListNode prev = null;
+        
+        head = reverse(head);
+        
+        return head;
+    }
+    
+    public ListNode reverse(ListNode head) {
+        if(head == null || head.next == null) {
+            return head;
         }
         
-        return prev;
+        ListNode newHead = reverse(head.next);
+        ListNode headNext = head.next;
+        headNext.next = head;
+        head.next = null;
+        return newHead;
     }
 }
