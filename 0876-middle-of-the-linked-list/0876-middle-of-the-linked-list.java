@@ -14,23 +14,27 @@ class Solution {
             return head;
         }   
         
-        int length = getLength(head);
-        int ans = length/2;
-        ListNode temp = head;
-        while(ans > 0) {
-            temp = temp.next;
-            ans--;
+        ListNode slow = head;
+        ListNode fast = head.next;
+        while(fast != null) {
+            slow = slow.next;
+            if(fast.next != null) {
+                fast = fast.next.next;    
+            } else {
+                fast = fast.next;
+            }
+            
         }
         
-        return temp;
+        return slow;
     }
     
-    public int getLength(ListNode head) {
-        int length = 0;
-        while(head != null) {
-            length++;
-            head = head.next;
-        }
-        return length;
-    }
+    // public int getLength(ListNode head) {
+    //     int length = 0;
+    //     while(head != null) {
+    //         length++;
+    //         head = head.next;
+    //     }
+    //     return length;
+    // }
 }
