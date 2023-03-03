@@ -14,23 +14,23 @@ class Solution {
             return head;
         }
         
-        // ListNode curr = head;
-        // ListNode prev = null;
+        ListNode curr = head;
+        ListNode prev = null;
         
-        head = reverse(head);
+        head = reverse(head, curr, prev);
         
         return head;
     }
     
-    public ListNode reverse(ListNode head) {
-        if(head == null || head.next == null) {
+    public ListNode reverse(ListNode head, ListNode curr, ListNode prev) {
+        if(curr == null) {
+            head = prev;
             return head;
         }
         
-        ListNode newHead = reverse(head.next);
-        ListNode headNext = head.next;
-        headNext.next = head;
-        head.next = null;
-        return newHead;
+        ListNode forward = curr.next;
+        head = reverse(head, forward, curr);
+        curr.next = prev;
+        return head;
     }
 }
