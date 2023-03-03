@@ -10,44 +10,34 @@
  */
 class Solution {
     public ListNode reverseKGroup(ListNode head, int k) {
-        int len = getLength(head);
-        return reverse(head, k, len);
-    }
-    
-    public ListNode reverse(ListNode head, int k, int length) {
-        if(head == null) return null;
-        if(length-k < 0) return head;
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
         
-        ListNode next = null;
-        ListNode curr = head;
-        ListNode prev = null;
+        ListNode pointer = dummy;
         
-        int count = 0;
-        
-        while(count < k && curr != null && (length-k) >= 0) {
-            next = curr.next;
-            curr.next = prev;
-            prev = curr;
-            curr = next;
-            count++;
+        while(pointer != null) {
+            ListNode node = pointer;
+            for(int i = 0; i < k && node != null; i++) {
+                node = node.next;
+            }
+            
+            if(node == null) break;
+            
+            ListNode next = null;
+            ListNode curr = pointer.next;
+            ListNode prev = null;
+            for(int i = 0; i < k; i++) {
+                next = curr.next;
+                curr.next = prev;
+                prev = curr;
+                curr = next;
+            }
+            
+            ListNode tail = pointer.next;
+            tail.next = curr;
+            pointer.next = prev;
+            pointer = tail;
         }
-        
-        if(next != null) {
-            head.next = reverse(next, k, length-k);    
-        }
-        
-        return prev;
-    }
-    
-    public int getLength(ListNode head) {
-        if(head.next == null) return 1;
-        int len = 0;
-        ListNode curr = head;
-        while(curr != null) {
-            len++;
-            curr = curr.next;
-        }
-        
-        return len;
+        return dummy.next;
     }
 }
