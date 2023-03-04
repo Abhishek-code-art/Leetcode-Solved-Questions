@@ -14,15 +14,19 @@ public class Solution {
         if(head == null || head.next == null) return null;
         
         if(head.next == head) return head;
+        ListNode slow = head;
+        ListNode fast = head;
+        ListNode start = head;
         
-        Map<ListNode, Boolean> visited = new HashMap<>();
-        ListNode temp = head;
-        while(temp != null) {
-            if(visited.getOrDefault(temp, false) == true) {
-                return temp;
-            } else {
-                visited.put(temp, true);
-                temp = temp.next;
+        while(fast.next != null && fast.next.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+            if(slow == fast) {
+                while(slow != start) {
+                    slow = slow.next;
+                    start = start.next;
+                }
+                return start;
             }
         }
         return null;
