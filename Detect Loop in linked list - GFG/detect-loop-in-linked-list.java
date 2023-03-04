@@ -83,13 +83,19 @@ class Solution {
         if(head.next == null) return false;
         if(head.next == head) return true;
         
-        Node slow = head;
-        Node fast = head.next;
+        Node temp = head;
+        // Node fast = head.next;
         
-        while(fast != null && fast.next != null) {
-            slow = slow.next;
-            fast = fast.next.next;
-            if(slow == fast) return true;
+        Map<Node, Boolean> visited = new HashMap<>();
+        
+        while(temp != null) {
+            if(visited.getOrDefault(temp, false) == true) {
+                return true;
+            }
+            visited.put(temp, true);
+            temp = temp.next;
+            // fast = fast.next.next;
+            // if(slow == fast) return true;
         }
         
         return false;
