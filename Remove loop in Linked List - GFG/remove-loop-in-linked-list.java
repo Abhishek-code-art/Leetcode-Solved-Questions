@@ -108,15 +108,27 @@ class Solution
 {
     //Function to remove a loop in the linked list.
     public static void removeLoop(Node head){
-        Map<Node, Boolean> visited = new HashMap<>();
-        Node temp = head;
-        while(temp != null) {
-            if(visited.getOrDefault(temp.next, false) == true) {
-                temp.next = null;
-            } else {
-                visited.put(temp, true);
-                temp = temp.next;
+        if(head == null || head.next == null) return;
+        
+        Node prev = null;
+        Node start = head;
+        Node slow = head;
+        Node fast = head;
+        
+        while(fast.next != null && fast.next.next != null) {
+            prev = slow;
+            slow = slow.next;
+            fast = fast.next.next;
+            if(slow == fast) {
+                while(slow != start) {
+                    prev = slow;
+                    slow = slow.next;
+                    start = start.next;
+                }
+                prev.next = null;
+                break;
             }
         }
+        
     }
 }
