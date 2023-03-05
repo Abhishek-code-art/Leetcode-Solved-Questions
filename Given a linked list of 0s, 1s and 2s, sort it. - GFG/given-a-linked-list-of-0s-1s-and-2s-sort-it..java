@@ -81,27 +81,46 @@ class Solution
     static Node segregate(Node head)
     {
         if(head.next == null) return head;
-        int[] count = new int[3];
-        Node temp = head;
-        while(temp != null) {
-            count[temp.data]++;
-            temp = temp.next;
+        
+        Node zeroHead = new Node(-1);
+        Node zeroTail = zeroHead;
+        Node oneHead = new Node(-1);
+        Node oneTail = oneHead;
+        Node twoHead = new Node(-1);
+        Node twoTail = twoHead;
+        
+        Node curr = head;
+        while(curr != null) {
+            int val = curr.data;
+            if(val == 0) {
+                zeroTail = insertToTail(zeroTail, curr);
+            } else if(val == 1) {
+                oneTail = insertToTail(oneTail, curr);
+            } else if(val == 2) {
+                twoTail = insertToTail(twoTail, curr);
+            }
+            curr = curr.next;
+        }
+
+        if(oneHead.next != null) {
+            zeroTail.next = oneHead.next;
+        } else {
+            zeroTail.next = twoHead.next;
         }
         
-        temp = head;
-        while(temp != null) {
-            if(count[0] > 0) {
-                temp.data = 0;
-                count[0]--;
-            } else if(count[1] > 0) {
-                temp.data = 1;
-                count[1]--;
-            } else if(count[2] > 0) {
-                temp.data = 2;
-                count[2]--;
-            }
-            temp = temp.next;
-        }
+        oneTail.next = twoHead.next;
+        twoTail.next = null;
+        head = zeroHead.next;
+        zeroHead = null;
+        oneHead = null;
+        twoHead = null;
+        
         return head;
+    }
+    
+    public static Node insertToTail(Node tail, Node curr) {
+        tail.next = curr;
+        tail = curr;
+        return tail;
     }
 }
