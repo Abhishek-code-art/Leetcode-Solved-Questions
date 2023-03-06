@@ -24,7 +24,6 @@ class Solution {
                 next = new ListNode(sum);
                 carry = 0;
             }
-            
             ans.next = next;
             ans = ans.next;
             l1 = l1.next;
@@ -41,12 +40,8 @@ class Solution {
                 next = new ListNode(sum);
                 carry = 0;
             }
-            
-            if(ans != null) {
-                ans.next = next;
-                ans = ans.next; 
-            }
-            
+            ans.next = next;
+            ans = ans.next;
             l1 = l1.next;
         }
         
@@ -60,22 +55,15 @@ class Solution {
                 next = new ListNode(sum);
                 carry = 0;
             }
-            
-            if(ans != null) {
-                ans.next = next;
-                ans = ans.next;    
-            }
-            
+            ans.next = next;
+            ans = ans.next;            
             l2 = l2.next;
         }
         
         if(carry != 0) {
             ListNode next = new ListNode(carry);
-            if(ans != null) {
             ans.next = next;
             ans = ans.next;    
-            }
-            
         }
         head = head.next;
         return head;
