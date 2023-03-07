@@ -13,19 +13,22 @@ class Solution {
         if(head.next == null) return head;
         
         ListNode temp = new ListNode(-1);
-        ListNode prev = temp;
         temp.next = head;
-        for(int i = 0; i < left-1; i++) prev = prev.next;
+        ListNode prev = temp;
         
-        ListNode curr = prev.next;
-        
-        for(int i = 0; i < right-left; i++) {
-            ListNode ptr = prev.next;
-            prev.next = curr.next;
-            curr.next = curr.next.next;
-            prev.next.next = ptr;
+        for(int i = 0; i < left-1; i++) {
+            prev = prev.next;
         }
         
+        ListNode curr = prev.next;
+        for(int i = 0; i < right-left; i++) {
+            ListNode pointer = prev.next;
+            prev.next = curr.next;
+            curr.next = curr.next.next;
+            prev.next.next = pointer;
+        }
+        
+        head = temp.next;
         return temp.next;
     }
 }
