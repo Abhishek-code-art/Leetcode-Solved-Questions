@@ -1,14 +1,7 @@
 class Solution {
     public long minimumTime(int[] time, int k) {
         long lo = 0;
-        long hi = 0;
-        for(int i = 0; i < time.length; i++) {
-            if(time[i] > hi) {
-                hi = time[i];
-            }
-        }
-        
-        hi = hi*k;
+        long hi = (long)Math.pow(10,14);
         long ans = hi;
         
         while(lo < hi) {
