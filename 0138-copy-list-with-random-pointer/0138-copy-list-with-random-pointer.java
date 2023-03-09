@@ -33,23 +33,42 @@ class Solution {
         
         Node originalNode = head;
         Node cloneNode = cloneHead;
-        Map<Node, Node> map = new HashMap<>();
         
         while(originalNode != null) {
-            map.put(originalNode, cloneNode);
-            originalNode = originalNode.next;
-            cloneNode = cloneNode.next;
+            Node next = originalNode.next;
+            originalNode.next = cloneNode;
+            originalNode = next;
+            next = cloneNode.next;
+            cloneNode.next = originalNode;
+            cloneNode = next;
         }
         
         originalNode = head;
         cloneNode = cloneHead;
         
-        while(originalNode != null) {
-            cloneNode.random = map.get(originalNode.random);
-            originalNode = originalNode.next;
-            cloneNode = cloneNode.next;
+        while(originalNode != null) { 
+            if(originalNode.random == null) {
+                originalNode.next.random = null;
+            } else {
+                originalNode.next.random = originalNode.random.next;
+            }
+            if(originalNode.next != null) {
+                originalNode = originalNode.next.next;
+            } else {
+                originalNode = null;
+            }
         }
         
+        originalNode = head;
+        while(cloneNode != null && cloneNode.next != null) {
+            originalNode.next = cloneNode.next;
+            originalNode = cloneNode.next;
+            cloneNode.next = originalNode.next;
+            cloneNode = cloneNode.next;
+        }
+        if(originalNode != null) {
+            originalNode.next = null;
+        }
         return cloneHead;
     }
 }
