@@ -90,9 +90,10 @@ class Solution
     }
     
     private static Node getMid(Node head) {
+        if(head == null) return head;
         Node slow = head;
-        Node fast = head;
-        while(fast.next != null && fast.next.next != null) {
+        Node fast = head.next;
+        while(fast != null && fast.next != null) {
             slow = slow.next;
             fast = fast.next.next;
         }
