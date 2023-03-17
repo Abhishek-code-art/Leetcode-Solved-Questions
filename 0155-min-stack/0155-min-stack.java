@@ -1,41 +1,28 @@
 class MinStack {
     Stack<Integer> st;
-    Stack<Integer> minStack;
+    // Stack<Integer> minStack;
     int min;
     
     public MinStack() {
         this.st = new Stack<>();
-        this.minStack = new Stack<>();
+        // this.minStack = new Stack<>();
         min = Integer.MAX_VALUE;
     }
     
     public void push(int val) {
-        if(st.isEmpty()) {
-            st.push(val);
-            minStack.push(val);
+        if(min >= val) {
+            st.push(min);
             min = val;
-        } else {
-            st.push(val);
-            if(min >= val) {
-                min = val;
-                minStack.push(val);
-            }
         }
+        st.push(val);
     }
     
     public void pop() {
-        if(!st.isEmpty()) {
-            int curr = st.peek();
+        if(min == st.peek()) {
             st.pop();
-            if(curr == min) {
-                int val = minStack.pop();
-                if(!minStack.isEmpty()) {
-                    min = minStack.peek();    
-                } else {
-                    min = val;
-                }
-            }
+            min = st.peek();
         }
+        st.pop();
     }
     
     public int top() {
