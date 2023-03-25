@@ -116,40 +116,21 @@ class GfG {
 }*/
 
 class Solution {
-    // Function to return the diameter of a Binary Tree.
+    int max = 0;
     int diameter(Node root) {
-        return diameterAndHeight(root).diameter;
+        maxDepth(root);
+        return max;
     }
     
-    private DiaPair diameterAndHeight(Node root) {
-        if(root == null) {
-            DiaPair p = new DiaPair(0, 0);
-            return p;
-        }
+    private int maxDepth(Node root) {
+        if(root == null) return 0;
         
-        DiaPair left = diameterAndHeight(root.left);
-        DiaPair right = diameterAndHeight(root.right);
+        int left = maxDepth(root.left);
+        int right = maxDepth(root.right);
         
-        int leftDiameter = left.diameter;
-        int rightDiameter = right.diameter;
-        int leftToRight = left.height+ right.height+ 1;
+        max = Math.max(max, left + right + 1);
         
-        DiaPair ans = new DiaPair();
-        ans.diameter = Math.max(leftDiameter, Math.max(rightDiameter, leftToRight));
-        ans.height = Math.max(left.height, right.height) + 1;
-        
-        return ans;
-    }
-}
-class DiaPair {
-    int diameter;
-    int height;
-    
-    DiaPair(){}
-    
-    DiaPair(int diameter, int height) {
-        this.diameter = diameter;
-        this.height = height;
+        return Math.max(left, right) + 1;
     }
 }
 
