@@ -119,7 +119,6 @@ class Solution
     boolean isEqual;
 	boolean isSumTree(Node root)
 	{
-	    if(root == null) return true;
         isEqual = true;
         maxDepth(root);
         return isEqual;
