@@ -14,38 +14,22 @@
  * }
  */
 class Solution {
+    int max = 0;
     public int diameterOfBinaryTree(TreeNode root) {
-        return fastDiameter(root).diameter;
+        maxDepth(root);
+        return max;
     }
     
-    private Pair fastDiameter(TreeNode root) {
+    private int maxDepth(TreeNode root) {
         if(root == null) {
-            Pair p = new Pair(0, 0);
-            return p;
+            return 0;
         }
         
-        Pair left = fastDiameter(root.left);
-        Pair right = fastDiameter(root.right);
+        int left = maxDepth(root.left);
+        int right = maxDepth(root.right);
         
-        int lDiameter = left.diameter;
-        int rDiameter = right.diameter;
-        int lToR = left.height + right.height;
+        max = Math.max(max, left + right);
         
-        Pair ans = new Pair();
-        ans.diameter = Math.max(lDiameter, Math.max(rDiameter, lToR));
-        ans.height = Math.max(left.height, right.height) + 1;
-        
-        return ans;
-    }
-}
-
-class Pair {
-    int diameter;
-    int height;
-    
-    Pair() {}
-    Pair(int diameter, int height) {
-        this.diameter = diameter;
-        this.height = height;
+        return Math.max(left, right) + 1;
     }
 }
