@@ -20,39 +20,26 @@ class Solution {
             return ans;
         }
         
-        Queue<TreeNode> q = new LinkedList<>();
-        q.add(root);
-        
-        boolean leftToRight = true;
-        
-        while(!q.isEmpty()) {
-            List<Integer> l = new ArrayList<>();
-            int size = q.size();
-            
-            for(int i = 0; i < size; i++) {
-                TreeNode temp = q.poll();
-                
-                // int index = leftToRight ? i:(size-i-1);
-                l.add(temp.val);
-                
-                if(temp.left != null) {
-                    q.add(temp.left);
-                }
-                
-                if(temp.right != null) {
-                    q.add(temp.right);
-                }
+        helper(ans, root, 0);
+        return ans;
+    }
+    
+    private void helper(List<List<Integer>> ans, TreeNode root, int level) {
+        if(root == null) {
+            return;
+        } else {
+            if(level >= ans.size()) {
+                ans.add(new ArrayList<>());
             }
             
-            if(!leftToRight) {
-                for(int i = 0; i < size; i++) {
-                    int index = (size-i-1);
-                    l.add(l.remove(index));
-                }
-            }   
-            leftToRight = !leftToRight;
-            ans.add(l);
+            if(level%2 == 0) {
+                ans.get(level).add(root.val);
+            } else {
+                ans.get(level).add(0, root.val);
+            }
+            
+            helper(ans, root.left, level+1);
+            helper(ans, root.right, level+1);
         }
-        return ans;
     }
 }
