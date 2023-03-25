@@ -129,38 +129,21 @@ class Node
 
 class Tree
 {
+    private boolean isBalance = true;
     boolean isBalanced(Node root)
     {
-	    return isBalanceFast(root).isBalance;
+	    maxDepth(root);
+	    return isBalance;
     }
     
-    Pair isBalanceFast(Node root) {
-        if(root == null) {
-	        Pair p = new Pair(true, 0);
-	        return p;
-	    }
-	    
-	    Pair left = isBalanceFast(root.left);
-	    Pair right = isBalanceFast(root.right);
-	    
-	    boolean diff = (Math.abs(left.height - right.height) <= 1);
-	    
-	    Pair ans = new Pair();
-	    ans.isBalance = (left.isBalance && right.isBalance && diff) ? true:false;
-	    ans.height = Math.max(left.height, right.height) + 1;
-	    
-	    return ans;
+    private int maxDepth(Node root) {
+        if(root == null) return 0;
+        
+        int left = maxDepth(root.left);
+        int right = maxDepth(root.right);
+        
+        if(Math.abs(left - right) > 1) isBalance = false;
+        
+        return Math.max(left, right) + 1;
     }
 }
-
-class Pair {
-    boolean isBalance;
-    int height;
-    
-    Pair(){}
-    Pair(boolean isBalance, int height) {
-        this.isBalance = isBalance;
-        this.height = height;
-    }
-}
-
