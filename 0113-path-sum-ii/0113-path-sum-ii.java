@@ -18,23 +18,22 @@ class Solution {
         List<List<Integer>> ans = new ArrayList<>();
         List<Integer> l = new ArrayList<>();
 
-        solve(root, targetSum, ans, l);
+        solve(root, targetSum, 0, ans, l);
         return ans;
     }
 
-    private void solve(TreeNode root, int sum, List<List<Integer>> ans, List<Integer> l) {
+    private void solve(TreeNode root, int k, int sum, List<List<Integer>> ans, List<Integer> l) {
         if(root == null) return;
         
+        sum += root.val;
         l.add(root.val);
         
-        if(root.left == null && root.right == null && sum == root.val) {
+        if(root.left == null && root.right == null && sum == k) {
             ans.add(new ArrayList<>(l));
             return;
         } 
         
-        solve(root.left, sum-root.val, ans, new ArrayList<>(l));
-        solve(root.right, sum-root.val, ans, new ArrayList<>(l));    
-        
-        // l.remove(l.size()-1);
+        solve(root.left, k, sum, ans, new ArrayList<>(l));
+        solve(root.right, k, sum, ans, new ArrayList<>(l));    
     }
 }
