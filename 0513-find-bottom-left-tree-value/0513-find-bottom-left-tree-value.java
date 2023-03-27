@@ -35,7 +35,7 @@ class Solution {
             ans = root.val;
         }
         
-        if(root.left != null) solve(root.left, level+1);
-        if(root.right != null) solve(root.right, level+1);
+        solve(root.left, level+1);
+        solve(root.right, level+1);
     }
 }
