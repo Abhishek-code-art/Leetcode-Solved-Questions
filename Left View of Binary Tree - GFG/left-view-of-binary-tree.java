@@ -128,18 +128,28 @@ class Tree
         
         ArrayList<Integer> ans = new ArrayList<>();
         if(root == null) return ans;
-        solve(root, ans, 0);
-        return ans;
-    }
-    
-    private void solve(Node root, ArrayList<Integer> ans, int level) {
-        if(root == null) return;
         
-        if(level == ans.size()) {
-            ans.add(root.data);
+        Queue<Node> q = new LinkedList<>();
+        q.add(root);
+        
+        while(!q.isEmpty()) {
+            int n = q.size();
+            for(int i = 0; i < n; i++) {
+                Node front = q.poll();
+                
+                if(i == 0) {
+                    ans.add(front.data);
+                }
+                
+                if(front.left != null) {
+                    q.add(front.left);
+                }
+                
+                if(front.right != null) {
+                    q.add(front.right);
+                }
+            }
         }
-        
-        solve(root.left, ans, level+1);
-        solve(root.right, ans, level+1);
+        return ans;
     }
 }
