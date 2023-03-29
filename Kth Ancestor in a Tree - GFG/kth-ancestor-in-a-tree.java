@@ -131,7 +131,7 @@ class Tree
         count = k;
         Node ans = solve(root, k, node);
         
-        if(ans == null || ans.data == node) return -1;
+        if(ans == null || count > 0) return -1;
         else {
             return ans.data;
         }
