@@ -57,30 +57,39 @@ class Solution
     public static Node buildTree(int inorder[], int preorder[], int n)
     {
         index = 0;
-        Node ans = solve(inorder, preorder, 0, n-1, n);
+        Map<Integer, List<Integer>> map = new HashMap<>();
+        mapIndex(inorder, map, n);
+        Node ans = solve(inorder, preorder, map, 0, n-1, n);
         return ans;
     }
     
-    private static Node solve(int[] in, int[] pre, int inStart, int inEnd, int n) {
+    private static Node solve(int[] in, int[] pre, Map<Integer, List<Integer>> map, int inStart, int inEnd, int n) {
         if(index >= n || inStart > inEnd) {
             return null;
         }
         
         int element = pre[index++];
         Node root = new Node(element);
-        int pos = findPosition(in, element, inStart, inEnd);
-        // int pos = map.get(element);
+        List<Integer> l = map.get(element);
+        int pos = l.remove(0);
         
-        root.left = solve(in, pre, inStart, pos-1, n);
-        root.right = solve(in, pre, pos+1, inEnd, n);
+        root.left = solve(in, pre, map, inStart, pos-1, n);
+        root.right = solve(in, pre, map, pos+1, inEnd, n);
         
         return root;
     }
     
-    private static int findPosition(int[] in, int element, int start, int end) {
-        for(int i = start; i <= end; i++) {
-            if(in[i] == element) return i;
+    private static void mapIndex(int[] in, Map<Integer, List<Integer>> map, int n) {
+        for(int i = 0; i < n; i++) {
+            if(!map.containsKey(in[i])) {
+                List<Integer> list = new ArrayList<>();
+                list.add(i);
+                map.put(in[i], list);
+            } else {
+                List<Integer> list = map.get(in[i]);
+                list.add(i);
+                map.put(in[i], list);
+            }
         }
-        return -1;
     }
 }
