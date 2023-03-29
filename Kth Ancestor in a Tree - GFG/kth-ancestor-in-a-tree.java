@@ -150,8 +150,8 @@ class Tree
         
         if(left != null && right == null) {
             count--;
-            if(count <= 0) {
-                count = Integer.MAX_VALUE;
+            if(count == 0) {
+                // count = Integer.MAX_VALUE;
                 return root;
             }
             
@@ -160,8 +160,8 @@ class Tree
         
         if(left == null && right != null) {
             count--;
-            if(count <= 0) {
-                count = Integer.MAX_VALUE;
+            if(count == 0) {
+                // count = Integer.MAX_VALUE;
                 return root;
             }
             
