@@ -15,7 +15,6 @@
  */
 class Solution {
     int count;
-    int pow = Integer.MAX_VALUE;
     public int pathSum(TreeNode root, int targetSum) {
         if(root == null) return 0;
         count = 0;
