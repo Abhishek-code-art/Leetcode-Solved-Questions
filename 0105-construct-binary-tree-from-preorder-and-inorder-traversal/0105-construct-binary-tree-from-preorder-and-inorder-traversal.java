@@ -25,7 +25,7 @@ class Solution {
         index = 0;
         Map<Integer, Integer> map = new HashMap<>();
         mapIndex(inorder, map);
-        TreeNode ans = solve(preorder, inorder, map, 0, inorder.length, inorder.length);
+        TreeNode ans = solve(preorder, inorder, map, 0, inorder.length-1, inorder.length);
         return ans;
     }
     
