@@ -18,30 +18,31 @@ class Solution {
     public int pathSum(TreeNode root, int targetSum) {
         if(root == null) return 0;
         count = 0;
-        HashMap<Long, Integer> map = new HashMap<>();
-        map.put(0L,1);
-        solve(root, targetSum, 0, map);
+        Map<Long, Integer> map = new HashMap<>();
+        map.put(0l, 1);
+        solve(root, targetSum, 0l, map);
         return count;
     }
     
-    private void solve(TreeNode root, int k, long sum, HashMap<Long, Integer> map) {
+    private void solve(TreeNode root, int k, long sum, Map<Long, Integer> map) {
         if(root == null) return;
         
-        sum = sum+root.val;
+        sum += root.val;
         
         if(map.containsKey(sum - k)) {
             count += map.get(sum-k);
         }
         
-        if(!map.containsKey(sum)) {
-            map.put(sum, 1);
-        } else {
+        if(map.containsKey(sum)) {
             map.put(sum, map.get(sum) + 1);
+        } else {
+            map.put(sum, 1);
         }
         
         solve(root.left, k, sum, map);
         solve(root.right, k, sum, map);
         
         map.put(sum, map.get(sum) - 1);
+        
     }
-}
+}  
