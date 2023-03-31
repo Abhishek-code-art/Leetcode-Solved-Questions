@@ -14,67 +14,80 @@
  * }
  */
 class Solution {
-    static int leastCol;
-    static int mostCol;
-
-    static List<List<Integer>> ans;
-    static PriorityQueue<Pair> pq;
-    
     public List<List<Integer>> verticalTraversal(TreeNode root) {
-        ans=new ArrayList<List<Integer>>();
-
-        bfs(root);
-        int sumCol=mostCol-leastCol+1;
-
-        for(int i=0;i<sumCol;i++)
-            ans.add(new ArrayList<Integer>());
+        List<List<Integer>> ans = new LinkedList<>();
+        Map<Integer, Map<Integer, List<Integer>>> map = new TreeMap<>();
+        Queue<Pair> q = new LinkedList<>();
+        q.add(new Pair(root, 0, 0));
         
-        while(!pq.isEmpty()){
-            Pair curr=pq.poll();
-            ((ArrayList<Integer>)ans.get(-leastCol+curr.col)).add(curr.node.val);
-        }
-        
-        return (List<List<Integer>> )ans;
-    }
-    public static void bfs(TreeNode root){
-        Queue<Pair> q=new LinkedList<Pair>();
-        pq =new PriorityQueue<Pair>();
-        int row=0;
-        int col=0;
-        q.add(new Pair(row,col, root));
-        leastCol=0;
-        mostCol=0;
-        row=1;
-        
-        while(!q.isEmpty()){
-            Pair curr = q.poll();
-            pq.add(curr);
+        while(!q.isEmpty()) {
+            Pair temp = q.poll();
             
-            if(curr.node.left!=null){
-                q.add(new Pair(curr.row+1, curr.col-1, curr.node.left));
-                leastCol=Math.min(leastCol, curr.col-1);
+            TreeNode front = temp.first;
+            int hd = temp.second;
+            int lvl = temp.third;
+            
+            if(map.containsKey(hd)) {
+                Map<Integer, List<Integer>> levelWise = map.get(hd);
+                if(levelWise.containsKey(lvl)) {
+                    List<Integer> list = levelWise.get(lvl);
+                    
+                    int size = list.size();
+                    int i;
+                    int data = list.get(size-1);
+                    for(i = size-1; i>0 && front.val < data;) {
+                        i--;
+                        data = list.get(i);
+                    }
+                    if(i == 0 && front.val < data) {
+                        list.add(i, front.val);
+                    } else {
+                        list.add(i+1, front.val);
+                    }
+                } else {
+                    List<Integer> list = new LinkedList<>();
+                    list.add(front.val);
+                    levelWise.put(lvl, list);
+                }
+                map.put(hd, levelWise);
+            } else {
+                Map<Integer, List<Integer>> levelWise = new TreeMap<>();
+                List<Integer> newList = new LinkedList<>();
+                newList.add(front.val);
+                levelWise.put(lvl, newList);
+                map.put(hd, levelWise);
             }
-            if(curr.node.right!=null){
-                q.add(new Pair(curr.row+1, curr.col+1, curr.node.right));
-                mostCol=Math.max(mostCol, curr.col+1);
-
+            
+            if(front.left != null) {
+                q.add(new Pair(front.left, hd-1, lvl+1));
+            }
+            
+            if(front.right != null) {
+                q.add(new Pair(front.right, hd+1, lvl+1));
             }
         }
+        
+        for(Map<Integer, List<Integer>> m : map.values()) {
+            List<Integer> tempList = new LinkedList<>();
+            for(List<Integer> l : m.values()) {
+                tempList.addAll(l);
+            }
+            ans.add(tempList);
+        }
+        
+        return ans;
     }
+}
+
+class Pair {
+    TreeNode first;
+    int second;
+    int third;
     
-    static class Pair implements Comparable<Pair>{
-        int col;
-        int row;
-        TreeNode node;
-        public Pair(int r,int c, TreeNode n){
-            row=r;
-            col=c;
-            node=n;
-        }
-        public int compareTo(Pair p){
-            if(col!=p.col) return col-p.col;
-            if(row!=p.row) return row-p.row;
-            return node.val-p.node.val;
-        }
+    Pair(){}
+    Pair(TreeNode first, int second, int third) {
+        this.first = first;
+        this.second = second;
+        this.third = third;
     }
 }
