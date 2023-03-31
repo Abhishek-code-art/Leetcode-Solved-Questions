@@ -23,15 +23,11 @@ class Solution {
                 while(pred.right != null) {
                     pred = pred.right;
                 }
+                
                 pred.right = curr.right;
                 curr.right = curr.left;
+                curr.left = null;
             }
-            curr = curr.right;
-        }
-        
-        curr = root;
-        while(curr != null) {
-            curr.left = null;
             curr = curr.right;
         }
     }
