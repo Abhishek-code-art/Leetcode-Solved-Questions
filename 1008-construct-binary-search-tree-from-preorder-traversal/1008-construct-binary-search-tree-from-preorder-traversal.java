@@ -16,37 +16,23 @@
 class Solution {
     private int index;
     public TreeNode bstFromPreorder(int[] pre) {
-        int[] in = new int[pre.length];
-        for(int i = 0; i < in.length; i++) {
-            in[i] = pre[i];
-        }
-        
-        Arrays.sort(in);
-        Map<Integer, Integer> map = new HashMap<>();
-        mapIndex(in, map);
-        
         index = 0;
-        TreeNode newRoot = solve(in, pre, map, 0, in.length-1, in.length);
-        
-        return newRoot;
+        return solve(pre, Integer.MIN_VALUE, Integer.MAX_VALUE, pre.length);
     }
     
-    private TreeNode solve(int[] in, int[] pre, Map<Integer, Integer> map, int s, int e, int n) {
-        if(index >= n || s > e) return null;
+    private TreeNode solve(int[] pre, int min, int max, int n) {
+        if(index >= n) return null;
         
-        int element = pre[index++];
-        TreeNode root = new TreeNode(element);
-        int pos = map.get(element);
-        
-        root.left = solve(in, pre, map, s, pos-1, n);
-        root.right = solve(in, pre, map, pos+1, e, n);
-        
-        return root;
-    }
-    
-    private void mapIndex(int[] in, Map<Integer, Integer> map) {
-        for(int i = 0; i < in.length; i++) {
-            map.put(in[i], i);
+        int element = pre[index];
+        if(element > min && element < max) {
+            index++;
+            TreeNode root = new TreeNode(element);
+            root.left = solve(pre, min, element, n);
+            root.right = solve(pre, element, max, n);
+            
+            return root;
+        } else {
+            return null;
         }
     }
 }
