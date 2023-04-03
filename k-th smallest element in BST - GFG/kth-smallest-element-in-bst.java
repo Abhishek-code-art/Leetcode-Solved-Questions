@@ -103,23 +103,37 @@ class GFG {
 // }
 
 class Solution {
-    private int ans;
+
     public int KthSmallestElement(Node root, int k) {
-        ans = -1;
-        solve(root, k);
+        int ans = -1;
+        
+        while(root != null) {
+            if(root.left != null) {
+                Node pred = root.left;
+                while(pred.right != null && pred.right != root) {
+                    pred = pred.right;
+                }
+                
+                if(pred.right == null) {
+                    pred.right = root;
+                    root = root.left;
+                } else {
+                    k--;
+                    if(k == 0) {
+                        ans = root.data;
+                        return ans;
+                    }
+                    root = root.right;
+                }
+            } else {
+                k--;
+                if(k == 0) {
+                    ans = root.data;
+                    return ans;
+                }
+                root = root.right;
+            }
+        }
         return ans;
-    }
-    
-    private int solve(Node root, int k) {
-        if(root == null) return k;
-        
-        k = solve(root.left, k);
-        
-        k--;
-        if(k == 0) ans = root.data;
-        
-        k = solve(root.right, k);
-        
-        return k;
     }
 }
