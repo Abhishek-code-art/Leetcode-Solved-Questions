@@ -14,24 +14,36 @@
  * }
  */
 class Solution {
-    private int ans;
     public int kthSmallest(TreeNode root, int k) {
-        ans = -1;
-        solve(root, k);
-        return ans;
-    }
-  
-    private int solve(TreeNode root, int k) {
-        if(root == null) return k;
+        int ans = -1;
         
-        k = solve(root.left, k);
-        k--;
-        if(k == 0) {
-            ans = root.val;
+        while(root != null) {
+            if(root.left != null) {
+                TreeNode pred = root.left;
+                while(pred.right != null && pred.right != root) {
+                    pred = pred.right;
+                }
+                
+                if(pred.right == null) {
+                    pred.right = root;
+                    root = root.left;
+                } else {
+                    k--;
+                    if(k == 0) {
+                        ans = root.val;
+                        return ans;
+                    }
+                    root = root.right;
+                }
+            } else {
+                k--;
+                if(k == 0) {
+                    ans = root.val;
+                    return ans;
+                }
+                root = root.right;
+            }
         }
-        
-        k = solve(root.right, k);
-        
-        return k;
+        return ans;
     }
 }
