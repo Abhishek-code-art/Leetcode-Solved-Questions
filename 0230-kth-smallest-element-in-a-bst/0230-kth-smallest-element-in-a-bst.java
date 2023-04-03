@@ -14,22 +14,24 @@
  * }
  */
 class Solution {
-    private static int number = 0;
-    private static int count = 0;
-
+    private int ans;
     public int kthSmallest(TreeNode root, int k) {
-          count = k;
-          helper(root);
-          return number;
+        ans = -1;
+        solve(root, k);
+        return ans;
     }
   
-    public void helper(TreeNode n) {
-        if (n.left != null) helper(n.left);
-        count--;
-        if (count == 0) {
-            number = n.val;
-            return;
+    private int solve(TreeNode root, int k) {
+        if(root == null) return k;
+        
+        k = solve(root.left, k);
+        k--;
+        if(k == 0) {
+            ans = root.val;
         }
-        if (n.right != null) helper(n.right);
+        
+        k = solve(root.right, k);
+        
+        return k;
     }
 }
