@@ -142,6 +142,7 @@ class Solution {
     
     boolean isHeap(Node tree) {
         if(tree.left == null && tree.right == null) return true;
+        
         boolean isCbt = isCbt(tree);
         if(isCbt) {
             boolean isHeap = checkMaxHeap(tree);
@@ -167,4 +168,4 @@ class Solution {
         
         return q.isEmpty();
     }
-}
+} 
