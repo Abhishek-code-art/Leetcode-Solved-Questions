@@ -61,19 +61,23 @@ class GFG {
 
 class Solution {
     public static int kthLargest(int N, int K, int[] arr) {
-        ArrayList<Integer> ans = new ArrayList<>();
-		int sum = 0;
-		for(int i = 0; i < N; i++) {
-			sum = 0;
-			for(int j = i; j < N; j++) {
-				sum += arr[j];
-				ans.add(sum);
-			}
-		}
-
-		Collections.sort(ans);
-
-		return ans.get(ans.size()-K);
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        int sum = 0;
+        for(int i = 0; i < arr.length; i++) {
+            sum = 0;
+            for(int j = i; j < arr.length; j++) {
+                sum += arr[j];
+                if(pq.size() < K) {
+                    pq.add(sum);
+                } else {
+                    if(pq.peek() < sum) {
+                        pq.poll();
+                        pq.add(sum);
+                    }
+                }
+            }
+        }
+        return pq.peek();
     }
 }
         
