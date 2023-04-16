@@ -34,19 +34,28 @@ class GFG {
 //User function Template for Java
 
 class Solution{
-    public static int kthSmallest(int[] arr, int l, int r, int k) 
+    public static int kthSmallest(int[] nums, int low, int high, int k) 
     { 
-        PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
-        for(int i = 0; i < k; i++) {
-            pq.add(arr[i]);
-        }
-        
-        for(int i = k; i <= r; i++) {
-            if(arr[i] < pq.peek()) {
-                pq.poll();
-                pq.add(arr[i]);
+        int pivot = low;
+        for(int i = low; i <= high; i++) {
+            if(nums[i] < nums[high]) {
+                swap(nums, i, pivot++);
             }
         }
-        return pq.peek();
-    } 
+        swap(nums, pivot, high);
+        
+        int count = pivot - low + 1;
+        if(count == k) return nums[pivot];
+        else if(count > k) {
+            return kthSmallest(nums, low, pivot-1, k);
+        } else {
+            return kthSmallest(nums, pivot+1, high, k-count);
+        }
+    }
+    
+    private static void swap(int[] nums, int i, int j) {
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+    }
 }
