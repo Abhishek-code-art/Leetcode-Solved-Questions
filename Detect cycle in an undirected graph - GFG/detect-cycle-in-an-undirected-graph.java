@@ -38,7 +38,7 @@ class Solution {
         boolean[] visited = new boolean[V];
         for(int i = 0; i < V; i++) {
             if(!visited[i]) {
-                boolean ans = isCycleBFS(i, adj, visited);
+                boolean ans = isCycleDFS(i, -1, adj, visited);
                 if(ans) {
                     return true;
                 }
@@ -47,27 +47,19 @@ class Solution {
         return false;
     }
     
-    private boolean isCycleBFS(int node, ArrayList<ArrayList<Integer>> adj, boolean[] visited) {
-        int[] parent = new int[visited.length];
-        parent[node] = -1;
-        visited[node] = true;
-        
-        Queue<Integer> q = new LinkedList<>();
-        q.add(node);
-        
-        while(!q.isEmpty()) {
-            int currNode = q.poll();
-            for(int neighbour : adj.get(currNode)) {
-                if(visited[neighbour] && neighbour != parent[currNode]) {
+    private boolean isCycleDFS(int curr, int parent, ArrayList<ArrayList<Integer>> adj, boolean[] visited) {
+        visited[curr] = true;
+
+        for(int neighbour : adj.get(curr)) {
+            if(!visited[neighbour]) {
+                boolean ans = isCycleDFS(neighbour, curr, adj, visited);
+                if(ans) {
                     return true;
-                } else if(!visited[neighbour]) {
-                    q.add(neighbour);
-                    visited[neighbour] = true;
-                    parent[neighbour] = currNode;
                 }
+            } else if(neighbour != parent) {
+                return true;
             }
         }
-        
         return false;
     }
 }
