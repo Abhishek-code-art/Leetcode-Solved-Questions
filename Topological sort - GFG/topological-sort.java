@@ -63,32 +63,35 @@ class Solution
      
     static int[] topoSort(int V, ArrayList<ArrayList<Integer>> adj) 
     {
-        boolean[] visited = new boolean[V];
-        Stack<Integer> st = new Stack<>();
         
+        int[] indegree = new int[V];
+        for(ArrayList<Integer> l : adj) {
+            for(int i : l) {
+                indegree[i]++;
+            }
+        }
+        
+        Queue<Integer> q = new LinkedList<>();
         for(int i = 0; i < V; i++) {
-            if(!visited[i]) {
-                topologicalSort(i, visited, adj, st);
+            if(indegree[i] == 0) {
+                q.add(i);
             }
         }
         
+        int[] ans = new int[V];
         int i = 0;
-        int[] ans = new int[st.size()];
-        while(!st.isEmpty()) {
-            ans[i] = st.pop();
-            i++;
-        }
-        
-        return ans;
-    }
-    
-    private static void topologicalSort(int node, boolean[] visited, ArrayList<ArrayList<Integer>> adj, Stack<Integer> st) {
-        visited[node] = true;
-        for(int neighbour : adj.get(node)) {
-            if(!visited[neighbour]) {
-                topologicalSort(neighbour, visited, adj, st);
+        while(!q.isEmpty()) {
+            int front = q.poll();
+            
+            ans[i++] = front;
+            
+            for(int neighbour : adj.get(front)) {
+                indegree[neighbour]--;
+                if(indegree[neighbour] == 0) {
+                    q.add(neighbour);
+                }
             }
         }
-        st.push(node);
+        return ans;
     }
 }
