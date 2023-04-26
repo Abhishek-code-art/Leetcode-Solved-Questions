@@ -62,9 +62,9 @@ class Solution{
 	    });
 	    
 	    boolean[] visited = new boolean[V];
-	    int[] parent = new int[V];
 	    int[] key = new int[V];
 	    Arrays.fill(key, Integer.MAX_VALUE);
+	    
 	    minHeap.add(new Pair(0, 0));
 	    key[0] = 0;
 	    
@@ -80,7 +80,6 @@ class Solution{
 	            
 	            if(!visited[neighbour.node] && neighbour.weight < key[neighbour.node]) {
 	                
-	                parent[neighbour.node] = top.node;
 	                key[neighbour.node] = neighbour.weight;
 	                
 	                minHeap.add(new Pair(neighbour.node, neighbour.weight));
