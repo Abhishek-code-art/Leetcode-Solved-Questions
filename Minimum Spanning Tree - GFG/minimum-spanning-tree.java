@@ -34,74 +34,84 @@ public class Main{
 // User function Template for Java
 
 class Solution{
+    private static int[] parent;
+    private static int[] rank;
+    
 	static int spanningTree(int V, int E, int edges[][]){
-	    ArrayList<ArrayList<Pair>> adj = new ArrayList<>();
-	    for(int i = 0; i < V; i++) {
-	        adj.add(new ArrayList<Pair>());
-	    }
-	    
-	    for(int i = 0; i < E; i++) {
+	    ArrayList<Pair> adj = new ArrayList<>();
+	    for(int i = 0; i < edges.length; i++) {
 	        int u = edges[i][0];
 	        int v = edges[i][1];
 	        int w = edges[i][2];
 	        
-	        adj.get(u).add(new Pair(v, w));
-	        adj.get(v).add(new Pair(u, w));
+	        adj.add(new Pair(u, v, w));
 	    }
 	    
-	    PriorityQueue<Pair> minHeap = new PriorityQueue<>(new Comparator<Pair>() {
+	    parent = new int[V];
+	    rank = new int[V];
+	    
+	    for(int i = 0; i < V; i++) {
+	        parent[i] = i;
+	    }
+	    
+	    Collections.sort(adj, new Comparator<Pair>() {
 	        public int compare(Pair p1, Pair p2) {
-	            if(p1.weight > p2.weight) {
+	            if(p1.w > p2.w) {
 	                return 1;
-	            } else if(p1.weight == p2.weight) {
+	            } else if(p1.w == p2.w) {
 	                return 0;
 	            } else {
 	                return -1;
 	            }
 	        }
 	    });
+	    int minWeight = 0;
 	    
-	    boolean[] visited = new boolean[V];
-	    int[] key = new int[V];
-	    Arrays.fill(key, Integer.MAX_VALUE);
-	    
-	    minHeap.add(new Pair(0, 0));
-	    key[0] = 0;
-	    
-	    while(!minHeap.isEmpty())  {
-	        Pair top = minHeap.poll();
+	    for(int i = 0; i < adj.size(); i++) {
+	        int u = findParent(adj.get(i).u);
+	        int v = findParent(adj.get(i).v);
+	        int weight = adj.get(i).w;
 	        
-	        if(visited[top.node]) continue;
-	        
-	        visited[top.node] = true;
-	        
-	        ArrayList<Pair> neighbours = adj.get(top.node);
-	        for(Pair neighbour : neighbours) {
-	            
-	            if(!visited[neighbour.node] && neighbour.weight < key[neighbour.node]) {
-	                
-	                key[neighbour.node] = neighbour.weight;
-	                
-	                minHeap.add(new Pair(neighbour.node, neighbour.weight));
-	            }
+	        if(u != v) {
+	            minWeight += weight;
+	            unionSet(u, v);
 	        }
 	    }
 	    
-	    int ans = 0;
-	    for(int i : key) {
-	        ans += i;
+	    return minWeight;
+	}
+	
+	private static int findParent(int node) {
+	    if(parent[node] == node) {
+	        return node;
 	    }
 	    
-	    return ans;
+	    return parent[node] = findParent(parent[node]);
+	}
+	
+	private static void unionSet(int u, int v) {
+	    u = findParent(u);
+	    v = findParent(v);
+	    
+	    if(rank[u] < rank[v]) {
+	        parent[u] = v;
+	    } else if(rank[u] > rank[v]) {
+	        parent[v] = u;
+	    } else {
+	        parent[v] = u;
+	        rank[u]++;
+	    }
 	}
 }
 
 class Pair {
-    int node;
-    int weight;
+   int u;
+   int v;
+   int w;
     
-    Pair(int node, int weight) {
-        this.node = node;
-        this.weight = weight;
+    Pair(int u, int v, int w) {
+        this.u = u;
+        this.v = v;
+        this.w = w;
     }
 }
