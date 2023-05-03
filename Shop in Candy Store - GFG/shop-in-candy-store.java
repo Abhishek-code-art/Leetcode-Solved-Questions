@@ -40,12 +40,8 @@ class Solution{
         
         int minPrice = 0;
         while(i<=j) {
-            int freeCandy = K;
             minPrice += candies[i];
-            while(i < candies.length && freeCandy > 0) {
-                j--;
-                freeCandy--;
-            }
+            j = j - K;
             i++;
         }
         
@@ -58,10 +54,7 @@ class Solution{
         while(i<=j) {
             int freeCandy = K;
             maxPrice += candies[j];
-            while(i < candies.length && freeCandy > 0) {
-                i++;
-                freeCandy--;
-            }
+            i = i + K;
             j--;
         }
         ans.add(maxPrice);
