@@ -42,7 +42,7 @@ class Solution{
         while(i<=j) {
             int freeCandy = K;
             minPrice += candies[i];
-            while(freeCandy > 0) {
+            while(i < candies.length && freeCandy > 0) {
                 j--;
                 freeCandy--;
             }
