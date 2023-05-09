@@ -13,25 +13,25 @@ class Solution {
         int endingCol = col - 1;
         
         while(count < total) {
-            for(int i = startingCol; count<total && i<=endingCol; i++) {
+            for(int i = startingCol; count < total && i <= endingCol; i++) {
                 ans.add(matrix[startingRow][i]);
                 count++;
             }
             startingRow++;
             
-            for(int i = startingRow; count<total && i<=endingRow; i++) {
+            for(int i = startingRow; count < total && i <= endingRow; i++) {
                 ans.add(matrix[i][endingCol]);
                 count++;
             }
             endingCol--;
             
-            for(int i = endingCol; count<total && i>=startingCol; i--) {
+            for(int i = endingCol; count < total && i >= startingCol; i--) {
                 ans.add(matrix[endingRow][i]);
                 count++;
             }
             endingRow--;
             
-            for(int i = endingRow; count<total && i>=startingRow; i--) {
+            for(int i = endingRow; count < total && i >= startingRow; i--) {
                 ans.add(matrix[i][startingCol]);
                 count++;
             }
@@ -39,4 +39,6 @@ class Solution {
         }
         return ans;
     }
+    
+    
 }
