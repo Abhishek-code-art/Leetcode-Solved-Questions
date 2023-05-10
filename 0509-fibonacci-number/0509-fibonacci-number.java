@@ -1,12 +1,18 @@
 class Solution {
     public int fib(int n) {
-        if(n < 2) return n;
-        int a = 0, b = 1, ans = 0;
-        for(int i = 2; i <= n; i++) {
-            ans = a+b;
-            a = b;
-            b = ans;
+        int[] dp = new int[n+1];
+        Arrays.fill(dp, -1);
+        
+        return solve(n, dp);
+    }
+    
+    private int solve(int n, int[] dp) {
+        if(n <= 1) {
+            return n;
         }
-        return ans;
+        
+        if(dp[n] != -1) return dp[n];
+        
+        return solve(n-1, dp) + solve(n-2, dp);
     }
 }
