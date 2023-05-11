@@ -42,36 +42,29 @@ class GfG {
 // } Driver Code Ends
 
 
- /*
-struct Job 
-{ 
-    int id;	 // Job Id 
-    int dead; // Deadline of job 
-    int profit; // Profit if job is over before or on deadline 
-};
-*/
-    class Solution{
+class Solution
+{
     //Function to find the maximum profit and the number of jobs done.
     int[] JobScheduling(Job arr[], int n)
     {
         Arrays.sort(arr, (a,b) -> (b.profit - a.profit));
         int max = 0;
         for(int i = 0; i < n; i++) {
-            if(max < arr[i].deadline) {
+            if(arr[i].deadline > max) {
                 max = arr[i].deadline;
             }
         }
         
-        int[] workDone = new int[max+1];
-        Arrays.fill(workDone, -1);
-        workDone[0] = 0;
-        
+        int[] workdone = new int[max+1];
+        Arrays.fill(workdone, -1);
+        workdone[0] = 0;
         int jobCount = 0;
         int maxProfit = 0;
+        
         for(int i = 0; i < n; i++) {
             for(int j = arr[i].deadline; j > 0; j--) {
-                if(workDone[j] == -1) {
-                    workDone[j] = arr[i].id;
+                if(workdone[j] == -1) {
+                    workdone[j] = arr[i].id;
                     jobCount++;
                     maxProfit += arr[i].profit;
                     break;
@@ -83,3 +76,14 @@ struct Job
         return res;
     }
 }
+
+/*
+class Job {
+    int id, profit, deadline;
+    Job(int x, int y, int z){
+        this.id = x;
+        this.deadline = y;
+        this.profit = z; 
+    }
+}
+*/
