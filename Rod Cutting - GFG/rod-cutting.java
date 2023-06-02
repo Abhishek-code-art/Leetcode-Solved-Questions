@@ -43,11 +43,13 @@ class Solution{
         if(n == 0 || i == 0) return 0;
         if(dp[i][n] != -1) return dp[i][n];
         
+        int notTake = 0 + solve(price, length, n, i-1, dp);
+        int take = Integer.MIN_VALUE;
         if(length[i-1] <= n) {
-            dp[i][n] = Math.max(price[i-1]+solve(price, length, n-length[i-1], i, dp), solve(price, length, n, i-1, dp));
-        } else {
-            dp[i][n] = solve(price, length, n, i-1, dp);
+            take = price[i-1]+solve(price, length, n-length[i-1], i, dp);
         }
+        
+        dp[i][n] = Math.max(take, notTake);
         
         return dp[i][n];
     }
