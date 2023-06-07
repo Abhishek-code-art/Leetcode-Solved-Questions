@@ -27,27 +27,24 @@ class GfG {
 class Solution {
     public long count(int coins[], int N, int sum) {
         long[][] dp = new long[N+1][sum+1];
-        for(long[] arr : dp) {
-            Arrays.fill(arr, -1);
+        
+        for(int i = 0; i <= sum; i++) {
+            dp[0][i] = 0;
         }
         
-        return solve(coins, N, sum, dp);
-    }
-    
-    long solve(int[] coins, int i, int sum, long[][] dp) {
-        if(sum == 0) return 1;
-        if(i == 0) return 0;
-        
-        if(dp[i][sum] != -1) return dp[i][sum];
-        
-        long notTake = solve(coins, i-1, sum, dp);
-        
-        long take = 0;
-        if(coins[i-1] <= sum) {
-            take += solve(coins, i, sum - coins[i-1], dp);
+        for(int i = 0; i <= N; i++) {
+            dp[i][0] = 1;
         }
         
-        dp[i][sum] = Math.max(dp[i-1][sum], take + notTake);
-        return dp[i][sum];
+        for(int i = 1; i <= N; i++) {
+            for(int j = 1; j <= sum; j++) {
+                if(coins[i-1] <= j) {
+                    dp[i][j] = dp[i][j-coins[i-1]] + dp[i-1][j];
+                } else {
+                    dp[i][j] = dp[i-1][j];
+                }
+            }
+        }
+        return dp[N][sum];
     }
-}
+} 
