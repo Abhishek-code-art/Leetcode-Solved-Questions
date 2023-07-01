@@ -1,33 +1,33 @@
 # Number of 1 Bits
 ## Easy
-<div class="problems_problem_content__Xm_eO"><p><span style="font-size:18px">Given a positive integer N, print count of set bits in it.&nbsp;</span></p>
+<div class="problems_problem_content__Xm_eO" style="user-select: auto;"><p style="user-select: auto;"><span style="font-size: 18px; user-select: auto;">Given a positive integer N, print count of set bits in it.&nbsp;</span></p>
 
-<p><strong><span style="font-size:18px">Example 1:</span></strong></p>
+<p style="user-select: auto;"><strong style="user-select: auto;"><span style="font-size: 18px; user-select: auto;">Example 1:</span></strong></p>
 
-<pre><span style="font-size:18px"><strong>Input:</strong>
+<pre style="user-select: auto;"><span style="font-size: 18px; user-select: auto;"><strong style="user-select: auto;">Input:</strong>
 N = 6</span>
-<span style="font-size:18px"><strong>Output:</strong>
+<span style="font-size: 18px; user-select: auto;"><strong style="user-select: auto;">Output:</strong>
 2</span>
-<span style="font-size:18px"><strong>Explanation:</strong>
+<span style="font-size: 18px; user-select: auto;"><strong style="user-select: auto;">Explanation:</strong>
 Binary representation is '110' 
 So the count of the set bit is 2.</span></pre>
 
-<p><strong><span style="font-size:18px">Example 2:</span></strong></p>
+<p style="user-select: auto;"><strong style="user-select: auto;"><span style="font-size: 18px; user-select: auto;">Example 2:</span></strong></p>
 
-<pre><span style="font-size:18px"><strong>Input:</strong>
+<pre style="user-select: auto;"><span style="font-size: 18px; user-select: auto;"><strong style="user-select: auto;">Input:</strong>
 8</span>
-<span style="font-size:18px"><strong>Output:</strong>
+<span style="font-size: 18px; user-select: auto;"><strong style="user-select: auto;">Output:</strong>
 1</span>
-<span style="font-size:18px"><strong>Explanation:</strong>
+<span style="font-size: 18px; user-select: auto;"><strong style="user-select: auto;">Explanation:</strong>
 Binary representation is '1000' 
 So the count of the set bit is 1.</span></pre>
 
-<p><span style="font-size:18px"><strong>Your Task:</strong>&nbsp;&nbsp;<br>
-You don't need to read input or print anything. Your task is to complete the function <strong>setBits</strong>()&nbsp;which takes an Integer N&nbsp;and returns the count of number of set bits.</span></p>
+<p style="user-select: auto;"><span style="font-size: 18px; user-select: auto;"><strong style="user-select: auto;">Your Task:</strong>&nbsp;&nbsp;<br style="user-select: auto;">
+You don't need to read input or print anything. Your task is to complete the function <strong style="user-select: auto;">setBits</strong>()&nbsp;which takes an Integer N&nbsp;and returns the count of number of set bits.</span></p>
 
-<p><span style="font-size:18px"><strong>Expected Time Complexity:</strong> O(LogN)<br>
-<strong>Expected Auxiliary Space:</strong> O(1)</span></p>
+<p style="user-select: auto;"><span style="font-size: 18px; user-select: auto;"><strong style="user-select: auto;">Expected Time Complexity:</strong> O(LogN)<br style="user-select: auto;">
+<strong style="user-select: auto;">Expected Auxiliary Space:</strong> O(1)</span></p>
 
-<p><span style="font-size:18px"><strong>Constraints:</strong><br>
-1 ≤ N ≤ 10<sup>9</sup></span></p>
+<p style="user-select: auto;"><span style="font-size: 18px; user-select: auto;"><strong style="user-select: auto;">Constraints:</strong><br style="user-select: auto;">
+1 ≤ N ≤ 10<sup style="user-select: auto;">9</sup></span></p>
 </div>
