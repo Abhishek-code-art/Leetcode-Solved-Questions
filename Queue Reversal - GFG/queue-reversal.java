@@ -53,15 +53,14 @@ class GfG{
     //Function to reverse the queue.
     public Queue<Integer> rev(Queue<Integer> q){
         Stack<Integer> st = new Stack<>();
-        
         while(!q.isEmpty()) {
-            st.push(q.poll());
+            int temp = q.poll();
+            st.push(temp);
         }
         
         while(!st.isEmpty()) {
             q.add(st.pop());
         }
-        
         return q;
     }
 }
