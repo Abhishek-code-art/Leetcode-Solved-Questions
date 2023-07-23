@@ -27,17 +27,34 @@ class GFG
 // } Driver Code Ends
 
 class Solution{
-    int longestCommonSubstr(String S1, String S2, int n, int m){
-        int[][] dp = new int[n+1][m+1];
-        int max = Integer.MIN_VALUE;
-        for(int i = 1; i <= n; i++) {
-            for(int j = 1; j <= m; j++) {
-                if(S1.charAt(i-1) == S2.charAt(j-1)) {
-                    dp[i][j] = 1 + dp[i-1][j-1];
-                    max = Math.max(dp[i][j], max);
-                }
-            }
+    int[][] dp;
+    int ans;
+    int longestCommonSubstr(String s1, String s2, int n, int m){
+        dp = new int[n+1][m+1];
+        ans = 0;
+        for(int[] arr : dp) {
+            Arrays.fill(arr, -1);
         }
-        return (max == Integer.MIN_VALUE) ? 0:max;
+        
+        solve(s1, s2, n, m);
+        return ans;
+    }
+    
+    private int solve(String s1, String s2, int n, int m) {
+        if(n == 0 || m == 0) return 0;
+        
+        if(dp[n][m] != -1) return dp[n][m];
+        
+        int substring_length = 0;
+        
+        if(s1.charAt(n-1) == s2.charAt(m-1)) {
+            substring_length = 1 + solve(s1, s2, n-1, m-1);
+            ans = Math.max(substring_length, ans);
+        }
+        
+        solve(s1, s2, n, m-1);
+        solve(s1, s2, n-1, m);
+        
+        return dp[n][m] = substring_length;
     }
 }
