@@ -98,7 +98,7 @@ class GfG {
 	            String s = br.readLine();
     	    	Node root = buildTree(s);
     	    	
-                Tree g = new Tree();
+                Solution g = new Solution();
         		System.out.println(g.kthAncestor(root,k,node));
                     t--;
             
@@ -123,50 +123,36 @@ class Node {
 }
 */
 
-class Tree
+class Solution
 {
-    int count;
     public int kthAncestor(Node root, int k, int node)
     {
-        count = k;
-        Node ans = solve(root, k, node);
+        Map<Integer, Integer> parent = new HashMap<>();
+        parent.put(root.data, -1);
         
-        if(ans == null || count > 0) return -1;
-        else {
-            return ans.data;
-        }
-    }
-    
-    
-    private Node solve(Node root, int k, int node) {
-        if(root == null) return null;
-        
-        if(root.data == node) {
-            return root;
-        }
-        
-        Node left = solve(root.left, k, node);
-        Node right = solve(root.right, k, node);
-        
-        if(left != null && right == null) {
-            count--;
-            if(count == 0) {
-                // count = Integer.MAX_VALUE;
-                return root;
+        Queue<Node> q = new LinkedList<>();
+        q.add(root);
+        while(!q.isEmpty()) {
+            Node top = q.poll();
+            
+            if(top.data == node) {
+                int key = top.data;
+                for(int i = 0; i < k; i++) {
+                    key = parent.getOrDefault(key,-1);
+                }
+                return key;
             }
             
-            return left;
-        }
-        
-        if(left == null && right != null) {
-            count--;
-            if(count == 0) {
-                // count = Integer.MAX_VALUE;
-                return root;
+            if(top.left != null) {
+                parent.put(top.left.data, top.data);
+                q.add(top.left);
             }
             
-            return right;
+            if(top.right != null) {
+                parent.put(top.right.data, top.data);
+                q.add(top.right);
+            }
         }
-        return null;
+        return -1;
     }
-}
+} 
