@@ -45,27 +45,15 @@ class GFG
 
 class Solution
 { 
-    static void reverse(Stack<Integer> s)
+    static void reverse(Stack<Integer> st)
     {
-        solve(s);
-    }
-    
-    private static void solve(Stack<Integer> st) {
-        if(st.isEmpty()) return;
-        
-        int num = st.pop();
-        solve(st);
-        insertAtBottom(st,num);
-    }
-    
-    private static void insertAtBottom(Stack<Integer> st, int num) {
-        if(st.isEmpty()) {
-            st.push(num);
-            return;
+        ArrayList<Integer> temp = new ArrayList<>();
+        while(!st.isEmpty()) {
+            temp.add(st.pop());
         }
         
-        int val = st.pop();
-        insertAtBottom(st,num);
-        st.push(val);
+        for(int val : temp) {
+            st.push(val);
+        }
     }
 }
