@@ -41,15 +41,10 @@ class Solution
         Collections.sort(a);
         int i = 0;
         int j = m-1;
-        
-        int min = Integer.MAX_VALUE;
+        long min = Long.MAX_VALUE;
         while(j < n) {
-            int diff = a.get(j) - a.get(i);
-            min = Math.min(diff, min);
-            i++;
-            j++;
+            min = Math.min(min, a.get(j++)-a.get(i++));
         }
-        
         return min;
     }
 }
