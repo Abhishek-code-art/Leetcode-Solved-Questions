@@ -37,20 +37,39 @@ public class Main {
 
 class Solution {
     int count(int[] arr, int n, int x) {
-        int i = 0;
-        int j = n-1;
-        while(i < n) {
-            if(arr[i] == x) break;
-            i++;
+        // first occurring index of element
+        int low = 0;
+        int high = n-1;
+        
+        int first = 1;
+        
+        while(low <= high) {
+            int mid = low + (high-low)/2;
+            if(arr[mid] == x) {
+                first = mid;
+                high = mid-1;
+            } else if(arr[mid] > x) {
+                high = mid-1;
+            } else {
+                low = mid+1;
+            }
         }
         
-        while(j >= 0) {
-            if(arr[j] == x) break;
-            j--;
+        int last = 0;
+        low = 0;
+        high = n-1;
+        while(low <= high) {
+            int mid = low + (high-low)/2;
+            if(arr[mid] == x) {
+                last = mid;
+                low = mid+1;
+            } else if(arr[mid] < x) {
+                low = mid+1;
+            } else if(arr[mid] > x) {
+                high = mid-1;
+            }
         }
         
-        if(i == n) return 0;
-        
-        return j-i+1;
+        return last-first+1;
     }
 }
