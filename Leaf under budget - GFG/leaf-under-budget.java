@@ -112,34 +112,36 @@ class Node {
 }
 */
 class Solution{
-    ArrayList<Integer> cost;
     public int getCount(Node node, int bud)
     {
-        cost = new ArrayList<>();
-        
-        solve(node,1);
-        
+        Queue<Node> q = new LinkedList<>();
+        q.add(node);
+        int level = 0;
         int count = 0;
         
-        Collections.sort(cost);
-        for(int i = 0; i < cost.size(); i++) {
-            if(bud >= cost.get(i)) {
-                count++;
-                bud -= cost.get(i);
+        while(!q.isEmpty()) {
+            int size = q.size();
+            level++;
+            for(int i = 0; i < size; i++) {
+                Node top = q.poll();
+                
+                if(top.left != null) {
+                    q.add(top.left);
+                }
+                
+                if(top.right != null) {
+                    q.add(top.right);
+                }
+                
+                if(top.left == null && top.right == null) {
+                    if(bud >= level) {
+                        bud -= level;
+                        count++;
+                    }
+                }
             }
         }
         
         return count;
-    }
-    
-    private void solve(Node root, int level) {
-        if(root == null) return;
-        
-        solve(root.left, level+1);
-        solve(root.right, level+1);
-        
-        if(root.left == null && root.right == null) {
-            cost.add(level);
-        }
     }
 }
