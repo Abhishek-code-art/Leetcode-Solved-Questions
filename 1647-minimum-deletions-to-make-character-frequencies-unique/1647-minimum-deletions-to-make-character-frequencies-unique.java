@@ -7,17 +7,12 @@ class Solution {
         }
         
         int delete = 0;
-        Set<Integer> uniq = new HashSet<>();
-        for(int i = 0; i < 26; i++) {
-            int freq = count[i];
-            while(freq > 0) {
-                if(!uniq.contains(freq)) {
-                    uniq.add(freq);
-                    break;
-                } else {
-                    freq--;
-                    delete++;
-                }
+        Arrays.sort(count);
+        for(int i = 24; i >= 0; i--) {
+            if(count[i] >= count[i+1]) {
+                int prev = count[i];
+                count[i] = Math.max(0,count[i+1] - 1);
+                delete += prev - count[i];
             }
         }
         
