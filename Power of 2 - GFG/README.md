@@ -1,0 +1,14 @@
+# Power of 2
+## Easy
+<div class="problems_problem_content__Xm_eO" style="user-select: auto;"><p style="user-select: auto;"><span style="font-size: 18px; user-select: auto;">Given a non-negative integer <strong style="user-select: auto;">N</strong>. The task is to check if N is a power of <strong style="user-select: auto;">2</strong>. More formally, check if<strong style="user-select: auto;"> N </strong>can be expressed as <strong style="user-select: auto;">2<sup style="user-select: auto;">x</sup> </strong>for some integer <strong style="user-select: auto;">x.</strong></span></p>
+<p style="user-select: auto;"><span style="font-size: 18px; user-select: auto;"><strong style="user-select: auto;">Example 1:</strong></span></p>
+<pre style="user-select: auto;"><span style="font-size: 18px; user-select: auto;"><strong style="user-select: auto;">Input: <br style="user-select: auto;"></strong>N = 8
+<strong style="user-select: auto;">Output: <br style="user-select: auto;"></strong>YES
+<strong style="user-select: auto;">Explanation:<br style="user-select: auto;"></strong>8 is equal to 2 raised to 3 (2<sup style="user-select: auto;">3</sup> = 8).</span></pre>
+<p style="user-select: auto;"><span style="font-size: 18px; user-select: auto;"><strong style="user-select: auto;">Example 2:</strong></span></p>
+<pre style="user-select: auto;"><span style="font-size: 18px; user-select: auto;"><strong style="user-select: auto;">Input: <br style="user-select: auto;"></strong>N = 98
+<strong style="user-select: auto;">Output: <br style="user-select: auto;"></strong>NO
+<strong style="user-select: auto;">Explanation: <br style="user-select: auto;"></strong>98 cannot be obtained by any power of 2.</span></pre>
+<p style="user-select: auto;"><span style="font-size: 18px; user-select: auto;"><strong style="user-select: auto;">Your Task:</strong>Your task is to complete the function <strong style="user-select: auto;">isPowerofTwo</strong>() which takes <strong style="user-select: auto;">n </strong>as a parameter and returns true or false by checking if the given number can be represented as a power of two or not.</span></p>
+<p style="user-select: auto;"><span style="font-size: 18px; user-select: auto;"><strong style="user-select: auto;">Expected Time Complexity:</strong>O(log N).<br style="user-select: auto;"><strong style="user-select: auto;">Expected Auxiliary Space:</strong>O(1).</span></p>
+<p style="user-select: auto;"><span style="font-size: 18px; user-select: auto;"><strong style="user-select: auto;">Constraints:</strong><br style="user-select: auto;">0 ≤ N ≤10<sup style="user-select: auto;">18</sup></span></p></div>
