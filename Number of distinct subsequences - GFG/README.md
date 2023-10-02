@@ -1,0 +1,14 @@
+# Number of distinct subsequences
+## Hard
+<div class="problems_problem_content__Xm_eO" style="user-select: auto;"><p style="user-select: auto;"><span style="font-size: 18px; user-select: auto;">Given a string consisting of lower case English alphabets, the task is to find the number of distinct subsequences of the string<br style="user-select: auto;"><strong style="user-select: auto;">Note:</strong> Answer can be very large, so, ouput will be answer modulo <strong style="user-select: auto;">10<sup style="user-select: auto;">9</sup>+7</strong>.</span></p>
+<p style="user-select: auto;"><strong style="user-select: auto;"><span style="font-size: 18px; user-select: auto;">Example 1:</span></strong></p>
+<pre style="user-select: auto;"><span style="font-size: 18px; user-select: auto;"><strong style="user-select: auto;">Input:</strong> <br style="user-select: auto;">s = "gfg"</span>
+<span style="font-size: 18px; user-select: auto;"><strong style="user-select: auto;">Output:</strong> <br style="user-select: auto;">7
+<strong style="user-select: auto;">Explanation:</strong> <br style="user-select: auto;">The seven distinct subsequences are "", "g", "f", "gf", "fg", "gg" and "gfg" .</span></pre>
+<p style="user-select: auto;"><strong style="user-select: auto;"><span style="font-size: 18px; user-select: auto;">Example 2:</span></strong></p>
+<pre style="user-select: auto;"><span style="font-size: 18px; user-select: auto;"><strong style="user-select: auto;">Input:</strong> <br style="user-select: auto;">s = "ggg"</span>
+<span style="font-size: 18px; user-select: auto;"><strong style="user-select: auto;">Output:</strong> <br style="user-select: auto;">4
+<strong style="user-select: auto;">Explanation:</strong> <br style="user-select: auto;">The four distinct subsequences are "", "g", "gg", "ggg".</span></pre>
+<p style="user-select: auto;"><span style="font-size: 18px; user-select: auto;"><strong style="user-select: auto;">Your task:</strong><br style="user-select: auto;">You do not need to read any input or print anything. The task is to complete the function <strong style="user-select: auto;">distinctSubsequences()</strong>, which takes a string as input and returns an integer. </span></p>
+<p style="user-select: auto;"><span style="font-size: 18px; user-select: auto;"><strong style="user-select: auto;">Expected Time Complexity:</strong>&nbsp;O(|str|)<br style="user-select: auto;"><strong style="user-select: auto;">Expected Auxiliary Space:</strong>&nbsp;O(|str|)</span></p>
+<p style="user-select: auto;"><span style="font-size: 18px; user-select: auto;"><strong style="user-select: auto;">Constraints:</strong></span><br style="user-select: auto;"><span style="font-size: 18px; user-select: auto;">1 ≤ |s| ≤ 10<sup style="user-select: auto;">5</sup><br style="user-select: auto;">s contains lower case English alphabets</span></p></div>
