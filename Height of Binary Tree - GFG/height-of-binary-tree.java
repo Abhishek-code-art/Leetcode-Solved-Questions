@@ -128,6 +128,6 @@ class Solution {
         int left = height(node.left);
         int right = height(node.right);
         
-        return Math.max(left, right)+1;
+        return 1 + Math.max(left, right);
     }
 }
