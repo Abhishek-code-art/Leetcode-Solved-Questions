@@ -129,21 +129,23 @@ class Node
 
 class Tree
 {
-    private boolean isBalance = true;
+    
+    boolean isBalance = true;
     boolean isBalanced(Node root)
     {
-	    maxDepth(root);
+	    height(root);
 	    return isBalance;
     }
     
-    private int maxDepth(Node root) {
+    private int height(Node root) {
         if(root == null) return 0;
         
-        int left = maxDepth(root.left);
-        int right = maxDepth(root.right);
+        int left = height(root.left);
+        int right = height(root.right);
         
-        if(Math.abs(left - right) > 1) isBalance = false;
+        if(Math.abs(left-right) > 1) isBalance = false;
         
-        return Math.max(left, right) + 1;
+        return Math.max(left, right)+1;
     }
 }
+
