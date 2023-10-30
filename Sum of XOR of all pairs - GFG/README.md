@@ -1,0 +1,17 @@
+# Sum of XOR of all pairs
+## Medium
+<div class="problems_problem_content__Xm_eO" style="user-select: auto;"><p style="user-select: auto;"><span style="font-size: 20px; user-select: auto;">Given an array of <strong style="user-select: auto;">N</strong> integers, find the <strong style="user-select: auto;">sum of xor </strong>of all pairs of numbers in the array <strong style="user-select: auto;">arr</strong>. In other words, select all possible pairs of <strong style="user-select: auto;">i</strong> and <strong style="user-select: auto;">j</strong> from <strong style="user-select: auto;">0</strong> to <strong style="user-select: auto;">N-1 (i&lt;j)</strong> and determine <strong style="user-select: auto;">sum </strong>of all <strong style="user-select: auto;">(arr<sub style="user-select: auto;">i</sub> xor arr<sub style="user-select: auto;">j</sub>)</strong>.</span></p>
+<p style="user-select: auto;"><span style="font-size: 20px; user-select: auto;"><strong style="user-select: auto;">Example 1:</strong></span></p>
+<pre style="user-select: auto;"><span style="font-size: 20px; user-select: auto;"><strong style="user-select: auto;">Input :</strong> arr[ ] = {7, 3, 5}
+<strong style="user-select: auto;">Output :</strong> 12
+<strong style="user-select: auto;">Explanation:</strong>
+All possible pairs and there Xor
+Value: ( 3 ^ 5 = 6 ) + (7 ^ 3 = 4)
+ + ( 7 ^ 5 = 2 ) =  6 + 4 + 2 = 12
+</span></pre>
+<p style="user-select: auto;"><span style="font-size: 20px; user-select: auto;"><strong style="user-select: auto;">Example 2:</strong></span></p>
+<pre style="user-select: auto;"><span style="font-size: 20px; user-select: auto;"><strong style="user-select: auto;">Input :</strong> arr[ ] = {5, 9, 7, 6} <strong style="user-select: auto;">
+Output :</strong>  47<br style="user-select: auto;"><strong style="user-select: auto;">Explanation:<br style="user-select: auto;"></strong>All possible pairs and there Xor<br style="user-select: auto;">Value: (5 ^ 9 = 12) + (5 ^ 7 = 2)<br style="user-select: auto;"> + (5 ^ 6 = 3) + (9 ^ 7 = 14)<br style="user-select: auto;"> + (9 ^ 6 = 15) + (7 ^ 6 = 1)<br style="user-select: auto;"> = 12 + 2 + 3 + 14 + 15 + 1 = 47</span></pre>
+<p style="user-select: auto;"><span style="font-size: 20px; user-select: auto;"><strong style="user-select: auto;">Your Task:</strong><br style="user-select: auto;">You do not have to take input or print output. You only need to complete the function <strong style="user-select: auto;">sumXOR()</strong> that takes an array <strong style="user-select: auto;">(arr)</strong>, sizeOfArray <strong style="user-select: auto;">(n)</strong>, and <strong style="user-select: auto;">return</strong>&nbsp;the <strong style="user-select: auto;">sum of xor of all pairs </strong>of numbers in the array.</span></p>
+<p style="user-select: auto;"><span style="font-size: 20px; user-select: auto;"><strong style="user-select: auto;">Expected Time Complexity:</strong> O(n).<br style="user-select: auto;"><strong style="user-select: auto;">Expected Auxiliary Space:</strong>&nbsp;O(1).</span></p>
+<p style="user-select: auto;"><span style="font-size: 20px; user-select: auto;"><strong style="user-select: auto;">Constraints</strong><br style="user-select: auto;">2 ≤ n ≤ 10<sup style="user-select: auto;">5</sup><br style="user-select: auto;">1 ≤ arr[i] ≤ 10<sup style="user-select: auto;">5 </sup></span></p></div>
